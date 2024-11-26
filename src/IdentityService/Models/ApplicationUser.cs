@@ -10,3 +10,4 @@ namespace IdentityService.Models;
 public class ApplicationUser : IdentityUser
 {
 }
+
