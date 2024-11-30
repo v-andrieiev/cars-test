@@ -47,7 +47,6 @@ export default function FIlters() {
     const orderBy = useParamsStore(state => state.orderBy);
     const filterBy = useParamsStore(state => state.filterBy);
     const setParams = useParamsStore(state => state.setParams);
-    console.log(orderBy)
   return (
     <div className='flex justify-between items-center mb-4'>
         <div>
