@@ -1,17 +1,17 @@
 import React from "react";
 import CountdownTimer from "./CountdownTimer";
-import Carimage from "./Carimage";
+import Carimage from "./CarImage";
+import Link from "next/link";
 
 type Props = {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   auction: any;
 };
 
 export default function AuctionCard({ auction }: Props) {
   return (
-    <a href="#" className='group'>
+    <Link href={`/auctions/details/${auction.id}`} className='group'>
       <div className="relative w-full bg-gray-200 aspect-[16/10] rounded-lg overflow-hidden">
-        <Carimage imageUrl={auction.imageUrl}  make={auction.make} model={auction.model} color={auction.color}/>
+        <Carimage imageUrl={auction.imageUrl} />
         <div className="absolute bottom-2 left-2">
           <CountdownTimer auctionEnd={auction.auctionEnd} />
         </div>
@@ -22,6 +22,6 @@ export default function AuctionCard({ auction }: Props) {
         </h3>
         <p className="font-semibold text-sm">{auction.year}</p>
       </div>
-    </a>
+    </Link>
   );
 }
