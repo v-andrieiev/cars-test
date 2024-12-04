@@ -13,7 +13,8 @@ namespace AuctionService.Controllers;
 
 [ApiController]
 [Route("api/auctions")]
-public class AuctionController(AuctionDbContext context, 
+public class AuctionController(
+        AuctionDbContext context, 
         IMapper mapper, 
         IPublishEndpoint publishEndpoint): ControllerBase
 {
