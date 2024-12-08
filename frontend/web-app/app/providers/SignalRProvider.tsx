@@ -14,9 +14,10 @@ import { getDetailedViewData } from "../actions/auctionActions";
 type Props = {
   children: ReactNode
   user: User | null
+  notifyUrl: string
 };
 
-export default function SignalRProvider({ children, user }: Props) {
+export default function SignalRProvider({ children, user, notifyUrl }: Props) {
   const connection = useRef<HubConnection | null>(null);
   const setCurrentPrice = useAuctionStore((state) => state.setCurrentPrice);
   const addBid = useBidStore((state) => state.addBid);
@@ -57,7 +58,7 @@ export default function SignalRProvider({ children, user }: Props) {
   useEffect(() => {
     if (!connection.current) {
       connection.current = new HubConnectionBuilder()
-        .withUrl("http://localhost:6001/notifications")
+        .withUrl(notifyUrl)
         .withAutomaticReconnect()
         .build();
 
@@ -75,7 +76,7 @@ export default function SignalRProvider({ children, user }: Props) {
         connection.current?.on("AuctionCreated", handleAuctionCreated);
         connection.current?.on("AuctionFinished", handleAuctionFinished);
     }
-  }, [handleBidPlaced, handleAuctionCreated, handleAuctionFinished]);
+  }, [handleBidPlaced, handleAuctionCreated, handleAuctionFinished, notifyUrl]);
 
   return <div>{children}</div>;
 }

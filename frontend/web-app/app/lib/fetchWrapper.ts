@@ -1,6 +1,6 @@
 import { auth } from "@/auth";
 
-const baseUrl = 'http://localhost:6001/'
+const baseUrl = process.env.API_URL;
 
 async function get(url: string){
     const requestOptions = {
@@ -12,8 +12,8 @@ async function get(url: string){
 
     return handleResponse(response);
 }
-
-async function post(url: string, body: {}){
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+async function post(url: string, body: any){
     const requestOptions = {
         method: 'POST',
         headers: await getHeaders(),
@@ -25,7 +25,8 @@ async function post(url: string, body: {}){
     return handleResponse(response);
 }
 
-async function put(url: string, body: {}){
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+async function put(url: string, body: any){
     const requestOptions = {
         method: 'PUT',
         headers: await getHeaders(),
@@ -53,6 +54,7 @@ async function getHeaders() {
     const session = await auth();
     const headers = {
         'Content-type': 'application/json'
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } as any
     if(session?.accessToken){
         headers.Authorization = 'Bearer ' + session.accessToken
@@ -66,7 +68,8 @@ async function handleResponse(response: Response) {
     let data;
     try {
         data = JSON.parse(text);
-    } catch (error) {   
+
+    } catch {   
         data = text;
     }
 

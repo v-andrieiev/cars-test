@@ -17,7 +17,8 @@ const nextConfig: NextConfig = {
         hostname: 'media.istockphoto.com'
       }
     ]
-  }
+  },
+  output: 'standalone'
 };
 
 export default nextConfig;

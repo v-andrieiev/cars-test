@@ -5,6 +5,7 @@ import Link from "next/link";
 import CurrentBid from "./CurrentBid";
 
 type Props = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   auction: any;
 };
 
